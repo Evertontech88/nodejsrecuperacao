@@ -1,74 +1,64 @@
 const ServiceExercicio = require('../services/exercicio')
 
 class ControllerExercicio {
-
-
     GetExericio(req, res) {
-        try{
-            const resultado = ServicesExercicio.GetExericio()
-            res.send({msg: e.message})
-        } catch (e) {
-            res.status(500).send({msg: error.message})
+        try {
+            const resultado = ServicesExercicio.GetExericio();
+            res.status(200).send({ data: resultado });
+        } catch (error) {
+            res.status(500).send({ msg: error.message });
         }
     }
+
     Operacao(req, res) {
         try {
             const resultado = ServicesExercicio.Operacao(req.body.num1, req.body.num2);
-            res.status(201).json({ resultado })
-        } catch (e) {
-            res.status(500).json({ msg: e.message })
+            res.status(201).json({ data: resultado });
+        } catch (error) {
+            res.status(500).json({ msg: error.message });
         }
     }
 
-    Converter (req, res) {
+    Converter(req, res) {
         try {
-            const { milhas, km } = req.body
-         
-            const resultado = ServicesExercicio
-                .Converter(milhas, kms)
+            const { milhas, km } = req.body; // Fixed variable name
             
-            res.status(201).json({ msg: resultado })
-        } catch (e) {
-            res.status(422).json({ msg: e.message })  
+            const resultado = ServicesExercicio.Converter(milhas, km);
+            res.status(201).json({ data: resultado });
+        } catch (error) {
+            res.status(422).json({ msg: error.message });
         }
     }
+
     Media(req, res) {
         try {
-            const { nota1, nota2, nota3 } = req.body
-        
-            const resultado = ServicesExercicio
-                .Media(nota1, nota2, nota3)
-            
-            res.status(201).json({ msg: resultado })
-        } catch (e) {
-            res.status(422).json({ msg: e.message })  
+            const { nota1, nota2, nota3 } = req.body;
+            const resultado = ServicesExercicio.Media(nota1, nota2, nota3);
+            res.status(201).json({ data: resultado });
+        } catch (error) {
+            res.status(422).json({ msg: error.message });
         }
     }
-    Tabuada (req, res) {
+
+    Tabuada(req, res) {
         try {
-            const { salarioHora, horasTrabalhadas } = req.body
-          
-            const resultado = ServicesExercicio
-                .Multiplicar(salarioHora, horasTrabalhadas)
-            
-            res.status(201).json({ msg: resultado })
-        } catch (e) {
-            res.status(422).json({ msg: e.message })  
+            const { salarioHora, horasTrabalhadas } = req.body;
+            const resultado = ServicesExercicio.Multiplicar(salarioHora, horasTrabalhadas);
+            res.status(201).json({ data: resultado });
+        } catch (error) {
+            res.status(422).json({ msg: error.message });
         }
     }
-Imposto(req, res) {
-    try {
-        const { salarioHora, dependentes, aliquota } = req.body
-     
-        const resultado = ServicesExercicio
-            .Imposto(salarioHora, dependentes, aliquota)
-        
-        res.status(201).json({ msg: resultado })
-    } catch (e) {
-        res.status(422).json({ msg: e.message })  
+
+    Imposto(req, res) {
+        try {
+            const { salarioHora, dependentes, aliquota } = req.body;
+            const resultado = ServicesExercicio.Imposto(salarioHora, dependentes, aliquota);
+            res.status(201).json({ data: resultado });
+        } catch (error) {
+            res.status(422).json({ msg: error.message });
+        }
     }
 }
 
-}
-
-module.exports = new ControllerExercicio()
+module.exports = new ControllerExercicio();
